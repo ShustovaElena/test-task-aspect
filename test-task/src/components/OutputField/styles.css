@@ -1,8 +1,29 @@
 .Output {
+    display: flex;
+    justify-content: space-around;
     width: 90vw;
     height: calc(100% - 20px);
     margin: 10px auto;
+    padding: 20px;
     background-color: #ffffff;
     border: 1px solid #636161;
     border-radius: 4px;
+}
+
+.panel {
+    border: 2px solid #6dfd68;
+}
+
+.label {
+    font-size: 2rem;
+}
+
+.button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: #c5f7c4;
+    cursor: pointer;
+    border: 2px solid #6dfd68;
 }

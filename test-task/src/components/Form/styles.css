@@ -1,0 +1,26 @@
+.Form {
+    display: flex;
+    gap: 30px;
+    justify-content: space-around;
+    width: 75vw;
+    padding: 20px 20px;
+    margin: 0px auto;
+}
+
+.input,
+label {
+    display: block;
+}
+
+label {
+    padding: 5px;
+}
+
+.Text-field {
+    width: 40vw;
+}
+
+.Submit {
+    align-self: flex-end;
+    height: 22px;
+}

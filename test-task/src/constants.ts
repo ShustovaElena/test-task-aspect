@@ -6,17 +6,28 @@ export const CONTENT = [
 			height: 200,
 			visible: true
 		},
+        content: [
+            {
+            type: 'panel',
+		    props: {
+			width: 200,
+			height: 100,
+			visible: true
+        }},
+    ]
+
 	},
 	{
 		type: 'label',
 		props: {
 			caption: 'test',
-			visible: false
+			visible: true
 		},
 	},
 	{
 		type: 'button',
 		props: {
+            caption: 'test',
 			width: 100,
 			height: 50,
 			visible: true

@@ -1,7 +1,7 @@
 import React from "react";
 import './styles.css';
 import { IElement } from "../../types";
-import { checkVisible } from "../Panel";
+import { checkValue } from "../Panel";
 
 export const Label = (data: IElement) => {
     const { caption, visible } = data.props;
@@ -10,7 +10,7 @@ export const Label = (data: IElement) => {
         <span
             className="label"
             style={{
-                visibility: checkVisible(visible) ? 'visible' : 'hidden'
+                visibility: checkValue(visible) ? 'visible' : 'hidden'
             }}>
                 {caption}
         </span>

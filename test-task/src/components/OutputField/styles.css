@@ -8,4 +8,5 @@
     background-color: #ffffff;
     border: 1px solid #636161;
     border-radius: 4px;
+    overflow: auto;
 }

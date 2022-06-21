@@ -1,7 +1,7 @@
 import React from "react";
 import './styles.css';
 import { IElement } from "../../types";
-import { checkVisible } from "../Panel";
+import { checkValue } from "../Panel";
 
 export const Button = (data: IElement) => {
     const { width, height, caption, visible } = data.props;
@@ -10,9 +10,9 @@ export const Button = (data: IElement) => {
         <button 
             className="button"
             style={{
-                width: width, 
-                height: height,
-                visibility: checkVisible(visible) ? 'visible' : 'hidden'
+                width: checkValue(width as number), 
+                height: checkValue(height as number),
+                visibility: checkValue(visible) ? 'visible' : 'hidden'
             }}>
                 {caption}
         </button>

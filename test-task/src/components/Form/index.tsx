@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FIRST_ELEMENT } from "../../constants";
 import { useAppSelector,useAppDispatch } from '../../store/hooks';
 import { changeContent } from '../../store/slices/ContentSlice';
 import { IElement } from "../../types";
@@ -20,11 +21,11 @@ export const Form = () => {
 
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
-                if (typeof obj[key as never] === 'object') {
+                if (typeof obj[key] === 'object') {
                     cloneObj[key] = getDeepCopy(obj[key]);
                     continue;
                 } else {
-                    cloneObj[key as never] = obj[key as never];
+                    cloneObj[key] = obj[key];
                 }
             }
         }
@@ -34,30 +35,39 @@ export const Form = () => {
 
     const changeValue = (contentData: IElement[]) => {
         try {
-        const objNum = Number(arr.shift()?.match(/\d+/)?.[0]);
-        if ((arr[0].match(/\d+/)?.[0])) {
-            const newData = contentData[objNum].content as IElement[]
-            changeValue(newData);
+            const objNum = Number(arr.shift()?.match(/\d+/)?.[FIRST_ELEMENT]);
+
+                if (arr[FIRST_ELEMENT] && (arr[FIRST_ELEMENT].match(/\d+/)?.[FIRST_ELEMENT])) {
+
+                    if (!contentData[objNum].content && typeof JSON.parse(value) === 'object') {
+                        contentData[objNum].content = [];
+                    } else {
+                        const newData = contentData[objNum].content as IElement[]
+                        changeValue(newData);
+                    }
+                }
+
+            const updateObjKey = arr.pop() as string;
+
+            if (arr.length !== FIRST_ELEMENT) {
+                const innerKey = arr[FIRST_ELEMENT] as never;
+                const newObj = contentData[objNum as number];
+                const innerObj = newObj[innerKey] as object;
+                const newObjValue = {[updateObjKey]: value};
+                const result = {...newObj, [innerKey]: {...innerObj, ...newObjValue}};
+                contentData[objNum] = result;
+            } 
+            else {
+                contentData[objNum].content?.push(JSON.parse(value));
+            }
+        } catch(error: any) {
+            if (error.name === 'SyntaxError') {
+                console.log('Не верный формат данных! Введите, например, {"type": "button", "props": {"caption": "test", "visible": "true"}}');
+            }
+            if (error.name === 'TypeError') {
+                console.log('Элемента по данному пути не существует');
+            }
         }
-
-        const updateObjKey = arr.pop() as string;
-
-        if (arr.length === 1) {
-            const innerKey = arr[0] as never;
-            const newObj = contentData[objNum as number];
-            const innerObj = newObj[innerKey] as object;
-            const newObjValue = {[updateObjKey]: value};
-            const result = {...newObj, [innerKey]: {...innerObj, ...newObjValue}};
-            contentData[objNum] = result;
-            console.log('result', result);
-        }
-
-        console.log('contentData', contentData);
-        console.log('content', content);
-    } 
-    catch(error) {
-        console.log(error);
-    }
     };
 
     const handleChangePath = (event: React.ChangeEvent) => {

@@ -6,16 +6,6 @@ export const CONTENT = [
 			height: 200,
 			visible: true
 		},
-        content: [
-            {
-            type: 'panel',
-		    props: {
-			width: 200,
-			height: 100,
-			visible: true
-        }},
-    ]
-
 	},
 	{
 		type: 'label',
@@ -33,4 +23,6 @@ export const CONTENT = [
 			visible: true
 		},
 	}
-]
+];
+
+export const FIRST_ELEMENT = 0;

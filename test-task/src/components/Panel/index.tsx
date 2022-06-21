@@ -3,10 +3,10 @@ import './styles.css';
 import { IElement } from "../../types";
 import { Drawer } from "../Drawer";
 
-export const checkVisible = (props: string | boolean) => {
+export const checkValue = (props: string | boolean | number) => {
     if (typeof props === 'string') {
         return JSON.parse(props);
-    } if (typeof props === 'boolean') {
+    } else {
         return props;
     }
 };
@@ -18,9 +18,9 @@ export const Panel = (data: IElement) => {
         <div 
             className="panel" 
             style={{
-                width: width, 
-                height: height,
-                visibility: checkVisible(visible) ? 'visible' : 'hidden'
+                width: checkValue(width as number), 
+                height: checkValue(height as number),
+                visibility: checkValue(visible) ? 'visible' : 'hidden'
             }}>
             {data.content && <Drawer contentData={data.content} />}
         </div>
